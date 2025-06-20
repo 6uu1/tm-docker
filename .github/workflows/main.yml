@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKER_IMAGE_NAME: your_dockerhub_username/your_image_name # 替换为你的 Docker Hub 用户名和镜像名
+  DOCKER_IMAGE_NAME: 741aaa/tmdocker # 替换为你的 Docker Hub 用户名和镜像名
 
 jobs:
   build-and-push:
