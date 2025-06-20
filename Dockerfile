@@ -3,14 +3,8 @@ FROM traffmonetizer/cli_v2:latest
 
 # 设置用户权限 (Hugging Face Spaces 要求)
 USER root
+RUN apt-get update && apt-get install -y shadow-utils supervisor python3 python3-pip && rm -rf /var/lib/apt/lists/*
 RUN useradd -m -u 1000 user
-
-# 安装必要的系统依赖
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    supervisor \
-    && rm -rf /var/lib/apt/lists/*
 
 # 创建应用目录
 RUN mkdir -p /home/user/app
