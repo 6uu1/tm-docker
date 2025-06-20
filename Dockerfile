@@ -3,7 +3,7 @@ FROM traffmonetizer/cli_v2:latest
 
 # 设置用户权限 (Hugging Face Spaces 要求)
 USER root
-RUN apt-get update && apt-get install -y shadow-utils supervisor python3 python3-pip && rm -rf /var/lib/apt/lists/*
+RUN apk update && apk add --no-cache shadow python3 py3-pip supervisor && rm -rf /var/cache/apk/*
 RUN useradd -m -u 1000 user
 
 # 创建应用目录
@@ -14,8 +14,9 @@ WORKDIR /home/user/app
 COPY --chown=user:user . /home/user/app
 
 # 安装 Python 依赖
-RUN pip3 install --no-cache-dir -r requirements.txt
-
+RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
+# Ensure the supervisor config directory exists
+RUN mkdir -p /etc/supervisor/conf.d
 # 创建 supervisor 配置
 RUN echo '[supervisord]' > /etc/supervisor/conf.d/supervisord.conf && \
     echo 'nodaemon=true' >> /etc/supervisor/conf.d/supervisord.conf && \
