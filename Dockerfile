@@ -1,5 +1,6 @@
 # 基于 traffmonetizer 官方镜像
 FROM traffmonetizer/cli_v2:latest
+ENTRYPOINT []
 
 # 设置用户权限 (Hugging Face Spaces 要求)
 USER root
